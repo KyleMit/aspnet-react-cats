@@ -12,14 +12,14 @@ using react_aspnet.models;
 namespace react_aspnet.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class BreedController : ControllerBase
+    [Route("api/[controller]")]
+    public class BreedsController : ControllerBase
     {
 
-        private readonly ILogger<BreedController> _logger;
+        private readonly ILogger<BreedsController> _logger;
         private readonly IConfiguration _configuration;
 
-        public BreedController(ILogger<BreedController> logger, IConfiguration configuration)
+        public BreedsController(ILogger<BreedsController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;

@@ -12,7 +12,7 @@ using react_aspnet.models;
 namespace react_aspnet.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CatController : ControllerBase
     {
 

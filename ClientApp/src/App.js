@@ -6,15 +6,15 @@ import { RandomCat } from './components/RandomCat';
 
 import './custom.css'
 
-export default class App extends Component {
-  static displayName = App.name;
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={RandomCat} />
-        <Route path='/fetch-data' component={FetchBreeds} />
-      </Layout>
-    );
-  }
+
+export default function App() {
+
+  return (
+    <Layout>
+      <Route exact path='/' component={RandomCat} />
+      <Route path='/breeds' component={FetchBreeds} />
+    </Layout>
+  );
+
 }

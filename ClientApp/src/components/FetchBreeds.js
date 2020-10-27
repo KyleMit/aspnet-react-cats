@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export class FetchBreeds extends Component {
-  static displayName = FetchBreeds.name;
 
-  constructor(props) {
-    super(props);
-    this.state = { breeds: [], loading: true };
-  }
+export function FetchBreeds() {
+  const [loading, setLoading] = useState(true);
+  const [breeds, setBreeds] = useState([]);
 
-  componentDidMount() {
-    this.populateBreedData();
-  }
+  useEffect(async () => {
+    const response = await fetch('/api/breeds');
+    const data = await response.json();
 
-  static renderBreedsTable(breeds) {
+    setBreeds(data)
+    setLoading(false);
+  }, []);
+
+  const renderBreedsTable = (breedList) => {
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
+      <table className='table table-striped' aria-labelledby="tableLabel">
         <thead>
           <tr>
             <th>Name</th>
@@ -22,7 +23,7 @@ export class FetchBreeds extends Component {
           </tr>
         </thead>
         <tbody>
-          {breeds.map(breed =>
+          {breedList.map(breed =>
             <tr key={breed.id}>
               <td>{breed.name}</td>
               <td>{breed.origin}</td>
@@ -33,23 +34,16 @@ export class FetchBreeds extends Component {
     );
   }
 
-  render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchBreeds.renderBreedsTable(this.state.breeds);
+  const contents = loading
+    ? <p><em>Loading...</em></p>
+    : renderBreedsTable(breeds);
 
-    return (
-      <div>
-        <h1 id="tabelLabel" >Get Breeds</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
 
-  async populateBreedData() {
-    const response = await fetch('breed');
-    const data = await response.json();
-    this.setState({ breeds: data, loading: false });
-  }
+  return (
+    <div>
+      <h1 id="tableLabel" >Get Breeds</h1>
+      <p>This component demonstrates fetching data from the server.</p>
+      {contents}
+    </div>
+  );
 }
