@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-export function FetchBreeds() {
+export function Breeds() {
   const [loading, setLoading] = useState(true);
   const [breeds, setBreeds] = useState([]);
 
